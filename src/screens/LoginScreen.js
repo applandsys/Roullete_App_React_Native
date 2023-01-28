@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useState, useEffect} from 'react';
 import {
   Button,
   Text,
@@ -19,6 +19,12 @@ const LoginScreen = ({navigation}) => {
   const [password, setPassword] = useState(null);
   const {isLoading, login} = useContext(AuthContext);
 
+  const {userInfo,  logout} = useContext(AuthContext);
+
+  useEffect(() => {
+    // Update the document title using the browser API
+      console.log(userInfo);
+  },[]);
 
   const onPress = () => {
     login(email, password);
@@ -28,7 +34,6 @@ const LoginScreen = ({navigation}) => {
 
   return (
     
-
     <SafeAreaView style={styles.container}>
     <ImageBackground
     source={image}

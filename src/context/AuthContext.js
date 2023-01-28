@@ -39,13 +39,15 @@ export const AuthProvider = ({children}) => {
       .post(`${BASE_URL}/auth/login`, {
         email,
         password,
-      })
+      },{ headers:
+        { "Access-Control-Allow-Origin": "*",  'Content-Type': 'application/json'} } )
       .then(res => {
         let userInfo = res.data;
         console.log(userInfo);
         setUserInfo(userInfo);
         AsyncStorage.setItem('userInfo', JSON.stringify(userInfo));
         setIsLoading(false);
+        navigation.navigate('Home');
       })
       .catch(e => {
         console.log(`login error ${e}`);
@@ -61,7 +63,7 @@ export const AuthProvider = ({children}) => {
         `${BASE_URL}/logout`,
         {},
         {
-          headers: {Authorization: `Bearer ${userInfo.access_token}`},
+          headers: {Authorization: `Bearer ${userInfo.token}`},
         },
       )
       .then(res => {
@@ -84,6 +86,7 @@ export const AuthProvider = ({children}) => {
       userInfo = JSON.parse(userInfo);
 
       if (userInfo) {
+        console.log("tumi login aso somashaua");
         setUserInfo(userInfo);
       }
 

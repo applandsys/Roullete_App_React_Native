@@ -24,3 +24,5 @@ https://docs.expo.dev/build/eas-json/
 
 // Source of this project //
 https://github.com/samironbarai/rn-auth
+
+npm install webpack-dev-server -g
